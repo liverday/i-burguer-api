@@ -13,4 +13,7 @@ export class Burguer {
 
     @Column()
     description?: string;
+
+    @Column()
+    price?: number;
 }
