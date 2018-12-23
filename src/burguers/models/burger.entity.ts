@@ -9,11 +9,11 @@ export class Burguer {
     name: string;
 
     @Column()
-    img?: string;
+    img: string;
 
-    @Column()
-    description?: string;
+    @Column({ type: 'longtext' })
+    description: string;
 
-    @Column()
-    price?: number;
+    @Column({ type: 'numeric' })
+    price: number;
 }
