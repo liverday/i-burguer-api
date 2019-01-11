@@ -12,6 +12,6 @@ async function bootstrap() {
   app.use(cors);
   app.use(bodyParser.json({ limit: '10mb' }));
   app.use(compression());
-  await app.listen(3000);
+  await app.listen(process.env.PORT || 3000);
 }
 bootstrap();

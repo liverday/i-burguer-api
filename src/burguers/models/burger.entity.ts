@@ -8,7 +8,7 @@ export class Burguer {
     @Column()
     name: string;
 
-    @Column()
+    @Column({ type: 'longtext' })
     img: string;
 
     @Column({ type: 'longtext' })
