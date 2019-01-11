@@ -9,7 +9,6 @@ require('./config/config');
     TypeOrmModule.forRoot({
       type: 'mysql',
       url: process.env.CLEARDB_DATABASE_URL,
-      database: process.env.DATABASE_NAME,
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       extra: {
         ssl: true
