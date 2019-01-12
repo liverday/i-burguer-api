@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Param, HttpCode, Body } from '@nestjs/common';
+import { Controller, Get, Post, Param, HttpCode, Body, Query} from '@nestjs/common';
 import { BurguersService } from './burguers.service';
 import { Burguer } from './models/burger.entity';
 
@@ -10,8 +10,8 @@ export class BurguersController {
     }
 
     @Get()
-    getBurguers() {
-        return this.service.getBurguers();
+    getBurguers(@Query() query) {
+        return this.service.getBurguers(query);
     }
 
     @Get(':id')

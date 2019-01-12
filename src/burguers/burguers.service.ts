@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Burguer } from './models/burger.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, Like } from 'typeorm';
 @Injectable()
 export class BurguersService {
     constructor(
@@ -9,7 +9,22 @@ export class BurguersService {
         private readonly burguerRepo: Repository<Burguer>
     ) { }
 
-    getBurguers = async (): Promise<Burguer[]> => await this.burguerRepo.find();
+    getBurguers = async (query?: any): Promise<Burguer[]> => {
+        let { filter, page, pageSize } = query;
+        if (filter) {
+            const name = `%${query.filter.toLowerCase()}%`;
+            return await this.burguerRepo.createQueryBuilder()
+                .where("LOWER(name) LIKE :name", { name })
+                .limit(pageSize || 5)
+                .offset((page || 0) * (pageSize || 5))
+                .getMany()
+        }
+
+        return await this.burguerRepo.createQueryBuilder()
+            .limit(pageSize || 5)
+            .offset((page || 0) * (pageSize || 5))
+            .getMany();
+    }
 
     getBurguer = async (id: number): Promise<Burguer> => await this.burguerRepo.findOne({ id })
 

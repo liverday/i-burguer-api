@@ -2,3 +2,4 @@ node_modules/
 dist/
 ormconfig.env
 config.json
+.env
