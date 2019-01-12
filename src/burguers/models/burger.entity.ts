@@ -1,8 +1,9 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn } from 'typeorm';
+import { BurguerCategory } from './burguer-category.entity';
 
 @Entity({ name: "tb_burguer" })
 export class Burguer {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn({ type: 'bigint' })
     id?: number;
 
     @Column()
@@ -11,9 +12,13 @@ export class Burguer {
     @Column({ type: 'longtext' })
     img: string;
 
-    @Column({ type: 'longtext' })
+    @Column()
     description: string;
 
     @Column({ type: 'numeric' })
     price: number;
+
+    @OneToOne(() => BurguerCategory)
+    @JoinColumn({ name: 'id_category' })
+    category: BurguerCategory;
 }

@@ -10,19 +10,37 @@ export class BurguersService {
     ) { }
 
     getBurguers = async (query?: any): Promise<Burguer[]> => {
-        let { filter, page, pageSize } = query;
+        let { filter, category, page, direction, orderBy, pageSize } = query;
+        const queryRepo = this.burguerRepo
+            .createQueryBuilder('tb_burguer')
+            .select([
+                'tb_burguer', 
+                'tb_burguer_category.id_category',
+                'tb_burguer_category.ds_category', 
+                'tb_burguer_category.color', 
+                'tb_burguer_category.font_color'
+            ])
+            .innerJoin('tb_burguer.category', 'tb_burguer_category');
+
         if (filter) {
             const name = `%${query.filter.toLowerCase()}%`;
-            return await this.burguerRepo.createQueryBuilder()
+            queryRepo
                 .where("LOWER(name) LIKE :name", { name })
-                .limit(pageSize || 5)
-                .offset((page || 0) * (pageSize || 5))
-                .getMany()
         }
 
-        return await this.burguerRepo.createQueryBuilder()
-            .limit(pageSize || 5)
-            .offset((page || 0) * (pageSize || 5))
+        if (category) {
+            queryRepo
+                .where('id_category = :category', { category });
+        }
+
+        if (orderBy && direction) {
+            queryRepo
+                .orderBy(`ORDER BY ${orderBy}`, direction);
+        }
+
+        return queryRepo
+            .take(pageSize || 5)
+            .skip((page || 0) * (pageSize || 5))
             .getMany();
     }
 
