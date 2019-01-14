@@ -10,32 +10,36 @@ export class BurguersService {
     ) { }
 
     getBurguers = async (query?: any): Promise<Burguer[]> => {
-        let { filter, category, page, direction, orderBy, pageSize } = query;
+        const { name, category, page, direction, orderBy, pageSize } = query;
         const queryRepo = this.burguerRepo
             .createQueryBuilder('tb_burguer')
             .select([
-                'tb_burguer', 
+                'tb_burguer',
                 'tb_burguer_category.id_category',
-                'tb_burguer_category.ds_category', 
-                'tb_burguer_category.color', 
+                'tb_burguer_category.ds_category',
+                'tb_burguer_category.color',
                 'tb_burguer_category.font_color'
             ])
             .innerJoin('tb_burguer.category', 'tb_burguer_category');
 
-        if (filter) {
-            const name = `%${query.filter.toLowerCase()}%`;
+        if (name) {
+            const filter = `%${name.toLowerCase()}%`;
             queryRepo
-                .where("LOWER(name) LIKE :name", { name })
+                .where("LOWER(name) LIKE :name", { filter })
         }
 
         if (category) {
+            const arr = category.split(",")
             queryRepo
-                .where('id_category = :category', { category });
+                .where('tb_burguer.id_category IN (:...category)', { category: arr });
         }
 
         if (orderBy && direction) {
             queryRepo
-                .orderBy(`ORDER BY ${orderBy}`, direction);
+                .orderBy(`tb_burguer.${orderBy}`, direction);
+        } else {
+            queryRepo
+                .orderBy('tb_burguer.price', 'DESC');
         }
 
         return queryRepo

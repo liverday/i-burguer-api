@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn } from 'typeorm';
-import { BurguerCategory } from './burguer-category.entity';
+import { BurguerCategory } from '../category/models/burguer-category.entity';
 
 @Entity({ name: "tb_burguer" })
 export class Burguer {
