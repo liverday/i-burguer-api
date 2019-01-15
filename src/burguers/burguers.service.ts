@@ -25,7 +25,7 @@ export class BurguersService {
         if (name) {
             const filter = `%${name.toLowerCase()}%`;
             queryRepo
-                .where("LOWER(name) LIKE :name", { filter })
+                .where("LOWER(name) LIKE :filter", { filter })
         }
 
         if (category) {
@@ -36,7 +36,7 @@ export class BurguersService {
 
         if (orderBy && direction) {
             queryRepo
-                .orderBy(`tb_burguer.${orderBy}`, direction);
+                .orderBy(`tb_burguer.${orderBy}`, direction.toUpperCase());
         } else {
             queryRepo
                 .orderBy('tb_burguer.price', 'DESC');
