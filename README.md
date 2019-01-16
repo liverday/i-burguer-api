@@ -17,5 +17,6 @@ $ npm install
  ```sh
  CLEARDB_DATABASE_URL=mysql://root:@localhost:3306/database
  ```
- - Depois disso, precisa criar os schemas no banco selecionado. Dentro de `src/start/` tem um pequeno script para a criação desses schemas. Assim como alguns valores iniciais
+ - Depois disso, precisa criar os schemas no banco selecionado. Dentro de `src/start/` tem um pequeno script para a criação desses schemas, assim como alguns valores iniciais.
+ 
  - Com eles prontos, somente rodar o comando `npm start` ou `npm run start:dev` para um servidor que ouve as mudanças!
