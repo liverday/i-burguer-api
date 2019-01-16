@@ -10,8 +10,9 @@ $ npm install
 
 ## Running the app
 
- - Primeiro, precisa mapear um banco de dados. Por padrão o projeto está configurado o MySQL. Para isso, precisa criar um arquivo `.env`. 
- - `env` é um arquivo de configuração de variáveis de ambiente, onde o pacote [dotenv](https://github.com/motdotla/dotenv) no ínicio da aplicação pegará essas variáveis e exportará ao sistema de origem. exemplo: 
+ - Primeiro, precisa mapear as variáveis de ambiente para o sistema funcionar. Por padrão o projeto está utilizando o banco MySQL. 
+ Para configurar sua URL, precisaremos criar um arquivo `.env`. 
+ - `.env` é um arquivo de configuração de variáveis de ambiente, onde a biblioteca [dotenv](https://github.com/motdotla/dotenv) no ínicio da aplicação pegará essas variáveis e exportará ao sistema de origem. exemplo: 
  
  ```sh
  CLEARDB_DATABASE_URL=mysql://root:@localhost:3306/database
