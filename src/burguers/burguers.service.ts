@@ -11,6 +11,7 @@ export class BurguersService {
 
     getBurguers = async (query?: any): Promise<Burguer[]> => {
         const { name, category, page, direction, orderBy, pageSize } = query;
+        let addAnd = false
         const queryRepo = this.burguerRepo
             .createQueryBuilder('tb_burguer')
             .select([
@@ -25,13 +26,16 @@ export class BurguersService {
         if (name) {
             const filter = `%${name.toLowerCase()}%`;
             queryRepo
-                .where("LOWER(name) LIKE :filter", { filter })
+                .where("LOWER(name) LIKE :name", { name: filter })
+            addAnd = true;
         }
-
+        
         if (category) {
             const arr = category.split(",")
-            queryRepo
-                .where('tb_burguer.id_category IN (:...category)', { category: arr });
+            if (addAnd) 
+                queryRepo.andWhere('tb_burguer.id_category IN (:...category)', { category: arr });
+            else 
+                queryRepo.where('tb_burguer.id_category IN (:...category)', { category: arr });
         }
 
         if (orderBy && direction) {

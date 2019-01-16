@@ -18,10 +18,4 @@ export class BurguersController {
     getBurguer(@Param('id') id) {
         return this.service.getBurguer(id);
     }
-
-    @Post()
-    @HttpCode(201)
-    addBurguer(@Body() burguer: Burguer) {
-        return this.service.addBurguer(burguer)
-    }
 }
