@@ -16,7 +16,7 @@ $ npm install
  - `.env` é um arquivo de configuração de variáveis de ambiente, onde a biblioteca [dotenv](https://github.com/motdotla/dotenv) no ínicio da aplicação pegará essas variáveis e exportará ao sistema de origem. exemplo: 
  
  ```sh
- CLEARDB_DATABASE_URL=mysql://root:@localhost:3306/database
+ CLEARDB_DATABASE_URL=mysql://<username>:<password>@<host>:<port>/<database>
  ```
  - Depois disso, precisa criar os schemas no banco selecionado. Dentro de `src/start/` tem um pequeno script para a criação desses schemas, assim como alguns valores iniciais.
  
