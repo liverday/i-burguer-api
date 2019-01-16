@@ -14,7 +14,7 @@ $ npm install
  - `env` é um arquivo de configuração de variáveis de ambiente, onde o pacote `dotenv` no ínicio da aplicação pegará essas variáveis e exportará ao sistema de origem. exemplo: 
  
  ```sh
- CLEARDB_DATABASE_URL=mysql://root:@localhost:3306/dbburguers
+ CLEARDB_DATABASE_URL=mysql://root:@localhost:3306/database
  ```
- - Depois disso, precisa criar os schemas no banco selecionado. [Aqui]() tem um pequeno script para a criação desses schemas.
+ - Depois disso, precisa criar os schemas no banco selecionado. Dentro de `src/start/` tem um pequeno script para a criação desses schemas. Assim como alguns valores iniciais
  - Com eles prontos, somente rodar o comando `npm start` ou `npm run start:dev` para um servidor que ouve as mudanças!
