@@ -11,7 +11,7 @@ $ npm install
 ## Running the app
 
  - Primeiro, precisa mapear as variáveis de ambiente para o sistema funcionar. Por padrão o projeto está utilizando o banco MySQL. 
- Para configurar sua URL, precisaremos criar um arquivo `.env`. 
+ Para configurar sua URL, precisaremos criar um arquivo `.env`. Caso você nunca tenha feito alguma conexão com um banco de dados utilizando NestJS, veja [aqui](https://docs.nestjs.com/techniques/database)
  
  - `.env` é um arquivo de configuração de variáveis de ambiente, onde a biblioteca [dotenv](https://github.com/motdotla/dotenv) no ínicio da aplicação pegará essas variáveis e exportará ao sistema de origem. exemplo: 
  
